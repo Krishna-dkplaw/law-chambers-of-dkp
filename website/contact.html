@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | Law Chambers Of DKP</title>
+  <meta name="description" content="Schedule a consultation with Law Chambers Of DKP. Chennai headquarters with associate offices in Madurai and Coimbatore." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-mark">Law Chambers Of DKP</span>
+        <span class="logo-sub">Advocates</span>
+      </a>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="practice-areas.html" class="nav-link">Practice Areas</a></li>
+        <li class="nav-dropdown">
+          <button type="button" class="nav-link nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">About <span class="nav-caret" aria-hidden="true">&#9662;</span></button>
+          <ul class="nav-dropdown-menu">
+            <li><a href="about.html" class="nav-dropdown-link">About the Firm</a></li>
+            <li><a href="team.html" class="nav-dropdown-link">Our Team</a></li>
+            <li><a href="courts.html" class="nav-dropdown-link">Courts &amp; Forums</a></li>
+          </ul>
+        </li>
+        <!-- Insights temporarily hidden: <li><a href="insights.html" class="nav-link">Insights</a></li> -->
+        <li><a href="contact.html" class="btn nav-cta">Consult Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-separator">/</span>
+        <span>Contact</span>
+      </div>
+      <h1>Schedule a <em style="color: var(--color-royal-blue-light); font-style: italic;">confidential consultation</em>.</h1>
+      <p class="page-hero-description">
+        Share the brief facts of your matter. We will respond with an initial view, an honest read on the legal position, and recommended next steps, typically within two business days.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT FORM + INFO ===== -->
+  <section>
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Left: Contact Information -->
+        <div>
+          <span class="eyebrow">Reach Out</span>
+          <h2 class="section-title">Direct lines to the chamber.</h2>
+          <div class="divider"></div>
+
+          <div class="contact-info-row">
+            <div class="contact-info-block">
+              <h4>Email</h4>
+              <p><a href="mailto:contact@dkplaw.in">contact@dkplaw.in</a></p>
+            </div>
+
+            <div class="contact-info-block">
+              <h4>Telephone</h4>
+              <p><a href="tel:+914400000000">+91 44 0000 0000</a></p>
+            </div>
+
+            <div class="contact-info-block">
+              <h4>Office Timings</h4>
+              <p>Monday to Friday<br />10:00 AM to 6:30 PM IST</p>
+            </div>
+          </div>
+
+          <div class="contact-info-block">
+            <h4>Confidentiality</h4>
+            <p style="font-family: var(--font-sans); font-size: 0.9375rem; color: var(--color-gray-dark); line-height: 1.75;">
+              All communications are treated as confidential. Submitting an enquiry does not by itself create an advocate-client relationship. Engagement begins only after a formal retainer.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div>
+          <form class="contact-form">
+            <div style="margin-bottom: 2rem;">
+              <span class="eyebrow">Consultation Request</span>
+              <h3 style="font-family: var(--font-serif); font-size: 1.75rem; font-weight: 500; color: var(--color-black); margin-top: 0.5rem;">Tell us about your matter.</h3>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="form-group">
+                <label for="practice">Practice Area</label>
+                <select id="practice" name="practice">
+                  <option value="">Select practice area</option>
+                  <option value="adr">Alternate Dispute Resolution</option>
+                  <option value="corporate">Corporate & Commercial</option>
+                  <option value="criminal">Criminal Law</option>
+                  <option value="family">Family Law</option>
+                  <option value="due-diligence">Due Diligence & Registrations</option>
+                  <option value="banking">Banking Laws</option>
+                  <option value="litigation">General Litigation</option>
+                  <option value="other">Other / Not Sure</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Brief title of your matter" required />
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Briefly describe your matter. Do not share confidential or privileged information at this stage." required></textarea>
+            </div>
+
+            <div style="margin-bottom: 1.5rem; padding: 1rem 1.25rem; background-color: var(--color-white); border-left: 3px solid var(--color-royal-blue);">
+              <p style="font-size: 0.875rem; color: var(--color-gray-dark); line-height: 1.65; margin: 0;">
+                Please do not share confidential or privileged information in your initial enquiry. Submission of this form does not by itself create an advocate-client relationship.
+              </p>
+            </div>
+
+            <button type="submit" class="btn" style="width: 100%; padding: 1.125rem;">Submit Enquiry</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OFFICES ===== -->
+  <section class="section-light">
+    <div class="container">
+      <span class="eyebrow">Office Locations</span>
+      <h2 class="section-title">Visit the chambers.</h2>
+      <p class="section-subtitle">Headquarters in Chennai with associate offices in Madurai and Coimbatore, meetings are by appointment only.</p>
+
+      <div class="offices-grid reveal">
+        <div class="office-card">
+          <h3>Chennai</h3>
+          <span class="office-type">Headquarters</span>
+          <address>
+            <strong style="color: var(--color-black);">Office 1</strong><br />
+            336, 2nd Floor, Old Shaw Wallace Building,<br />
+            Thambu Chetty Street, Parrys Corner,<br />
+            Chennai 600001<br />
+            India
+          </address>
+          <address style="margin-top: 1rem;">
+            <strong style="color: var(--color-black);">Office 2</strong><br />
+            21/10, Dr. Radhakrishnan Nagar Main Road,<br />
+            Thiruvanmiyur,<br />
+            Chennai 600041<br />
+            India
+          </address>
+          <p style="font-size: 0.875rem; color: var(--color-gray-dark); margin-top: 1rem;">
+            <strong style="color: var(--color-black);">Phone:</strong> +91 44 0000 0000<br />
+            <strong style="color: var(--color-black);">Email:</strong> chennai@dkplaw.in
+          </p>
+        </div>
+        <div class="office-card">
+          <h3>Madurai</h3>
+          <span class="office-type associate">Associate Office</span>
+          <address>
+            Plot No 7, MM Nagar,<br />
+            Valarnagar Etn, Uthangudi,<br />
+            Madurai 625023<br />
+            India
+          </address>
+          <p style="font-size: 0.875rem; color: var(--color-gray-dark); margin-top: 1rem;">
+            <strong style="color: var(--color-black);">Phone:</strong> +91 452 000 0000<br />
+            <strong style="color: var(--color-black);">Email:</strong> madurai@dkplaw.in
+          </p>
+        </div>
+        <div class="office-card">
+          <h3>Coimbatore</h3>
+          <span class="office-type associate">Associate Office</span>
+          <address>
+            No 110, 1st Floor,<br />
+            Behind HSBC Bank, Race Course,<br />
+            Coimbatore 641018<br />
+            India
+          </address>
+          <p style="font-size: 0.875rem; color: var(--color-gray-dark); margin-top: 1rem;">
+            <strong style="color: var(--color-black);">Phone:</strong> +91 422 000 0000<br />
+            <strong style="color: var(--color-black);">Email:</strong> coimbatore@dkplaw.in
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-mark">Law Chambers Of DKP</div>
+          <div class="logo-sub">Advocates</div>
+          <p class="footer-tagline">"A multi-service law firm built on four decades of courtroom credibility."</p>
+        </div>
+        <div class="footer-col">
+          <h5>Practice</h5>
+          <ul class="footer-list">
+            <li><a href="practice-areas.html#adr">Dispute Resolution</a></li>
+            <li><a href="practice-areas.html#corporate">Corporate Law</a></li>
+            <li><a href="practice-areas.html#criminal">Criminal Law</a></li>
+            <li><a href="practice-areas.html#family">Family Law</a></li>
+            <li><a href="practice-areas.html#banking">Banking Laws</a></li>
+            <li><a href="practice-areas.html#due-diligence">Due Diligence</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Firm</h5>
+          <ul class="footer-list">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="team.html">Our Team</a></li>
+            <li><a href="courts.html">Courts & Forums</a></li>
+            <!-- Insights temporarily hidden: <li><a href="insights.html">Insights</a></li> -->
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Offices</h5>
+          <ul class="footer-list">
+            <li style="color: rgba(255,255,255,0.7); line-height: 1.7; font-size: 0.9375rem;">
+              <strong style="color: var(--color-white);">Chennai, Headquarters</strong><br />
+              336, 2nd Floor, Old Shaw Wallace Building,<br />
+              Thambu Chetty Street, Parrys Corner,<br />
+              Chennai - 600001
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 Law Chambers Of DKP. All rights reserved.</p>
+        <ul class="footer-legal-links">
+          <li><a href="#disclaimer">Disclaimer</a></li>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#terms">Terms & Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="disclaimer-banner">
+      <div class="container">
+        <p class="disclaimer-text">
+          Bar Council of India Notice: This website is not a solicitation or advertisement. The information provided is for general purposes only and does not constitute legal advice or create an advocate-client relationship.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Admin | Law Chambers Of DKP</title>
+  <meta name="robots" content="noindex" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    .admin-wrap { max-width: 860px; margin: 0 auto; padding: 140px 1.5rem 80px; }
+    .admin-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .admin-head .logo-mark { font-family: var(--font-serif); font-size: 1.5rem; text-transform: uppercase; color: var(--color-black); }
+    .admin-card { background: var(--color-white); border: 1px solid var(--color-line); padding: 2rem; margin-bottom: 2rem; }
+    .admin-card h2 { font-size: 1.5rem; margin-bottom: 1.25rem; }
+    .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .admin-field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .admin-field.full { grid-column: 1 / -1; }
+    .admin-field label { font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; letter-spacing: 0.04em; color: var(--color-gray-dark); text-transform: uppercase; }
+    .admin-field input, .admin-field textarea {
+      font-family: var(--font-sans); font-size: 1rem; padding: 0.85rem 1rem;
+      border: 1px solid var(--color-line); outline: none; background: var(--color-bg-cream); color: var(--color-dark);
+    }
+    .admin-field input:focus, .admin-field textarea:focus { border-color: var(--color-black); }
+    .admin-field textarea { resize: vertical; min-height: 90px; }
+    .admin-actions { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-top: 0.5rem; }
+    .admin-btn-sm { padding: 0.5rem 1rem !important; font-size: 0.875rem !important; }
+    .admin-btn-danger { background: hsl(4,84%,48%); border-color: hsl(4,84%,48%); }
+    .admin-btn-danger:hover { background: hsl(4,84%,40%); border-color: hsl(4,84%,40%); }
+    .admin-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--color-line); flex-wrap: wrap; }
+    .admin-row:last-child { border-bottom: none; }
+    .admin-row-actions { display: flex; gap: 0.5rem; }
+    .admin-muted { color: var(--color-gray); font-weight: 400; }
+    .admin-small { font-size: 0.875rem; margin-top: 0.25rem; }
+    .admin-error { color: hsl(4,84%,40%); font-size: 0.95rem; min-height: 1.2em; }
+    .admin-success { color: #1a7f3c; font-size: 0.95rem; min-height: 1.2em; }
+    .admin-warning { background: #fff7e6; border: 1px solid #f0c36d; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+    .admin-warning code { background: rgba(0,0,0,0.06); padding: 0.1rem 0.35rem; }
+    .login-box { max-width: 420px; margin: 0 auto; }
+    @media (max-width: 640px) { .admin-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="admin-wrap">
+    <div class="admin-head">
+      <a href="team.html" class="logo" style="text-decoration:none;">
+        <span class="logo-mark">Law Chambers Of DKP</span>
+      </a>
+      <a href="team.html" class="btn-link">View team page</a>
+    </div>
+
+    <!-- Shown only when Supabase isn't configured -->
+    <div id="config-warning" class="admin-warning" style="display:none;">
+      <strong>Supabase not configured yet.</strong>
+      <p style="margin-top:.5rem;">Open <code>assets/js/supabase-config.js</code> and add your Project URL and anon key, then run
+      <code>supabase/team-setup.sql</code> in the Supabase SQL editor and create an admin user under Authentication &gt; Users.</p>
+    </div>
+
+    <!-- Login -->
+    <div id="login-view" class="admin-card login-box">
+      <h2>Team admin login</h2>
+      <form id="login-form">
+        <div class="admin-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" autocomplete="username" required />
+        </div>
+        <div class="admin-field">
+          <label for="password">Password</label>
+          <input type="password" id="password" autocomplete="current-password" required />
+        </div>
+        <div id="login-error" class="admin-error"></div>
+        <button type="submit" class="btn" style="width:100%;">Log In</button>
+      </form>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard-view" style="display:none;">
+      <div class="admin-head">
+        <p class="admin-muted">Signed in as <strong id="user-email"></strong></p>
+        <button id="logout-btn" class="btn btn-outline admin-btn-sm">Log Out</button>
+      </div>
+
+      <div class="admin-card">
+        <h2 id="form-title">Add a team member</h2>
+        <form id="member-form">
+          <div class="admin-grid">
+            <div class="admin-field"><label for="f-name">Name *</label><input type="text" id="f-name" required /></div>
+            <div class="admin-field"><label for="f-designation">Designation</label><input type="text" id="f-designation" placeholder="Associate" /></div>
+
+            <div class="admin-field full">
+              <label for="f-photo">Photo</label>
+              <input type="file" id="f-photo" accept="image/*" />
+              <div id="photo-preview-wrap" style="display:none; align-items:center; gap:1rem; margin-top:.6rem;">
+                <img id="photo-preview" alt="Current photo"
+                     style="width:64px; height:64px; object-fit:cover; border:1px solid var(--color-line);" />
+                <label class="admin-muted admin-small" style="text-transform:none; letter-spacing:0; font-weight:400;">
+                  <input type="checkbox" id="f-remove-photo" /> Remove photo
+                </label>
+              </div>
+              <span class="admin-muted admin-small">Optional. If empty, the initials block is shown instead.</span>
+            </div>
+
+            <div class="admin-field"><label for="f-initials">Initials (avatar fallback)</label><input type="text" id="f-initials" maxlength="3" placeholder="Auto from name" /></div>
+            <div class="admin-field"><label for="f-sort">Sort order</label><input type="number" id="f-sort" value="0" /></div>
+
+            <div class="admin-field"><label for="f-meta1-label">Detail 1 — label</label><input type="text" id="f-meta1-label" placeholder="Enrolled" /></div>
+            <div class="admin-field"><label for="f-meta1-value">Detail 1 — value</label><input type="text" id="f-meta1-value" placeholder="1983" /></div>
+            <div class="admin-field"><label for="f-meta2-label">Detail 2 — label</label><input type="text" id="f-meta2-label" placeholder="Experience" /></div>
+            <div class="admin-field"><label for="f-meta2-value">Detail 2 — value</label><input type="text" id="f-meta2-value" placeholder="40+ Years" /></div>
+            <div class="admin-field"><label for="f-meta3-label">Detail 3 — label</label><input type="text" id="f-meta3-label" placeholder="Forums" /></div>
+            <div class="admin-field"><label for="f-meta3-value">Detail 3 — value</label><input type="text" id="f-meta3-value" placeholder="SC · HC · DRT" /></div>
+
+            <div class="admin-field full"><label for="f-bio">Bio</label><textarea id="f-bio" placeholder="Leave a blank line between paragraphs."></textarea></div>
+          </div>
+          <div class="admin-actions">
+            <button type="submit" id="save-btn" class="btn">Add Team Member</button>
+            <button type="button" id="cancel-edit" class="btn btn-outline" style="display:none;">Cancel</button>
+            <span id="form-msg" class="admin-success"></span>
+          </div>
+        </form>
+      </div>
+
+      <div class="admin-card">
+        <h2>Current team</h2>
+        <div id="members-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/js/supabase-config.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
