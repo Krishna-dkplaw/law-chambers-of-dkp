@@ -935,6 +935,9 @@ section {
   padding: 4rem 3rem;
   transition: all var(--transition);
   position: relative;
+  /* Column layout so the stats block can be pinned to the bottom of the card */
+  display: flex;
+  flex-direction: column;
 }
 
 .team-card:hover {
@@ -1005,6 +1008,8 @@ section {
   padding-top: 1.5rem;
   border-top: 1px solid var(--color-line);
   font-size: 0.875rem;
+  /* Push the stats + divider to the bottom so they align across all cards */
+  margin-top: auto;
 }
 
 .team-meta-item {
@@ -1499,14 +1504,11 @@ section {
   list-style: none;
 }
 
-.footer-legal-links a {
+/* Legal items are plain text for now (no pages yet) — not clickable, no hover */
+.footer-legal-links li {
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.875rem;
-  text-decoration: none;
-}
-
-.footer-legal-links a:hover {
-  color: var(--color-white);
+  cursor: default;
 }
 
 .disclaimer-banner {

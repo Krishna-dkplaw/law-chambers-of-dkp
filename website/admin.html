@@ -11,11 +11,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/styles.css" />
   <style>
-    .admin-wrap { max-width: 860px; margin: 0 auto; padding: 140px 1.5rem 80px; }
-    .admin-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .admin-wrap { max-width: 900px; margin: 0 auto; padding: 120px 1.5rem 80px; }
+    .admin-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem 2rem; flex-wrap: wrap; border-bottom: 1px solid var(--color-line); padding-bottom: 1.75rem; margin-bottom: 3.5rem; }
     .admin-head .logo-mark { font-family: var(--font-serif); font-size: 1.5rem; text-transform: uppercase; color: var(--color-black); }
-    .admin-card { background: var(--color-white); border: 1px solid var(--color-line); padding: 2rem; margin-bottom: 2rem; }
-    .admin-card h2 { font-size: 1.5rem; margin-bottom: 1.25rem; }
+    .admin-head-left { display: flex; flex-direction: column; }
+    .admin-head-actions { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-left: auto; }
+    .admin-card { background: var(--color-white); border: 1px solid var(--color-line); padding: 2rem; }
     .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .admin-field { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
     .admin-field.full { grid-column: 1 / -1; }
@@ -26,76 +27,188 @@
     }
     .admin-field input:focus, .admin-field textarea:focus { border-color: var(--color-black); }
     .admin-field textarea { resize: vertical; min-height: 90px; }
-    .admin-actions { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; margin-top: 0.5rem; }
     .admin-btn-sm { padding: 0.5rem 1rem !important; font-size: 0.875rem !important; }
-    .admin-btn-danger { background: hsl(4,84%,48%); border-color: hsl(4,84%,48%); }
+    .admin-btn-danger { background: hsl(4,84%,48%); border-color: hsl(4,84%,48%); color: #fff; }
     .admin-btn-danger:hover { background: hsl(4,84%,40%); border-color: hsl(4,84%,40%); }
-    .admin-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--color-line); flex-wrap: wrap; }
-    .admin-row:last-child { border-bottom: none; }
-    .admin-row-actions { display: flex; gap: 0.5rem; }
     .admin-muted { color: var(--color-gray); font-weight: 400; }
     .admin-small { font-size: 0.875rem; margin-top: 0.25rem; }
     .admin-error { color: hsl(4,84%,40%); font-size: 0.95rem; min-height: 1.2em; }
     .admin-success { color: #1a7f3c; font-size: 0.95rem; min-height: 1.2em; }
     .admin-warning { background: #fff7e6; border: 1px solid #f0c36d; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
     .admin-warning code { background: rgba(0,0,0,0.06); padding: 0.1rem 0.35rem; }
-    .login-box { max-width: 420px; margin: 0 auto; }
-    @media (max-width: 640px) { .admin-grid { grid-template-columns: 1fr; } }
+
+    /* ----- Section header + list ----- */
+    .admin-section-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .admin-section-head h2 { font-size: 1.5rem; margin: 0; }
+    .member-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.15rem 0; border-bottom: 1px solid var(--color-line); flex-wrap: wrap; }
+    .member-row:last-child { border-bottom: none; }
+    .member-row-main { display: flex; align-items: center; gap: 1rem; min-width: 0; }
+    .member-avatar { width: 46px; height: 46px; flex: none; display: flex; align-items: center; justify-content: center; background: var(--color-charcoal); color: #fff; font-family: var(--font-serif); font-size: 1rem; object-fit: cover; }
+    .member-name { font-size: 1.0625rem; font-weight: 700; color: var(--color-black); }
+    .member-actions { display: flex; gap: 0.5rem; flex: none; }
+    .admin-empty { text-align: center; color: var(--color-gray); padding: 2.5rem 1rem; }
+
+    /* ----- Modal ----- */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: none; align-items: center; justify-content: center; padding: 1.5rem 1.25rem; z-index: 1000; overflow-y: auto; }
+    .modal-overlay.open { display: flex; }
+    .modal-dialog { background: var(--color-white); border: 1px solid var(--color-line); width: 100%; max-width: 660px; margin: auto; }
+    .modal-dialog.confirm { max-width: 440px; }
+    .modal-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.5rem 2rem; border-bottom: 1px solid var(--color-line); }
+    .modal-head h2 { font-size: 1.5rem; margin: 0; }
+    .modal-close { background: none; border: none; cursor: pointer; font-size: 1.75rem; line-height: 1; color: var(--color-gray); padding: 0 0.25rem; }
+    .modal-close:hover { color: var(--color-black); }
+    .modal-body { padding: 2rem; }
+    .modal-foot { display: flex; gap: 0.75rem; align-items: center; justify-content: flex-end; padding: 1.25rem 2rem; border-top: 1px solid var(--color-line); flex-wrap: wrap; }
+
+    /* Custom file input: Choose file button, then chosen-name + clear */
+    .file-chosen { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border: 1px solid var(--color-line); background: var(--color-bg-cream); padding: 0.6rem 1rem; }
+    .file-name { font-size: 0.95rem; color: var(--color-dark); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-clear { background: none; border: none; cursor: pointer; font-size: 1.35rem; line-height: 1; color: var(--color-gray); flex: none; padding: 0 0.25rem; }
+    .file-clear:hover { color: var(--color-black); }
+
+    /* Fixed-height modal: sticky header + footer, only the fields scroll */
+    .modal-scroll { height: 80vh; display: flex; flex-direction: column; }
+    .modal-scroll .modal-head, .modal-scroll .modal-foot { flex: none; }
+    .modal-scroll form { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+    .modal-scroll .modal-body { flex: 1; overflow-y: auto; min-height: 0; }
+
+    /* ----- Toast ----- */
+    .toast { position: fixed; left: 50%; bottom: 1.75rem; transform: translateX(-50%) translateY(1rem); background: var(--color-black); color: #fff; padding: 0.9rem 1.5rem; font-family: var(--font-sans); font-size: 0.95rem; opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; z-index: 1200; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ----- Centered login screen ----- */
+    .admin-login-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem 1.5rem; }
+    .admin-login-box { width: 100%; max-width: 420px; }
+    .admin-login-box .login-logo { display: block; font-family: var(--font-serif); font-size: 1.5rem; text-transform: uppercase; letter-spacing: 0.02em; color: var(--color-black); text-decoration: none; margin-bottom: 1.5rem; }
+    .admin-login-box .admin-card { margin-bottom: 0; }
+    .admin-login-box h2 { font-size: 1.5rem; margin-bottom: 1.25rem; }
+    .admin-forgot { margin-top: 1.1rem; }
+    .admin-forgot a { font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-royal-blue); text-decoration: none; }
+    .admin-forgot a:hover { text-decoration: underline; }
+
+    @media (max-width: 640px) {
+      .admin-wrap { padding: 96px 1.15rem 64px; }
+      .admin-grid { grid-template-columns: 1fr; }
+      .member-actions { width: 100%; }
+      .member-actions .btn { flex: 1; }
+      /* Roomier modals on phones */
+      .modal-overlay { padding: 0.75rem; align-items: flex-start; }
+      .modal-head, .modal-foot { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .modal-body { padding: 1.5rem 1.25rem; }
+      .modal-head h2 { font-size: 1.3rem; }
+      .modal-scroll { height: auto; max-height: 92vh; }
+      /* Full-width, easy-tap footer buttons */
+      .modal-foot { flex-direction: column-reverse; align-items: stretch; }
+      .modal-foot .btn { width: 100%; }
+    }
   </style>
 </head>
 <body>
-  <div class="admin-wrap">
-    <div class="admin-head">
-      <a href="team.html" class="logo" style="text-decoration:none;">
-        <span class="logo-mark">Law Chambers Of DKP</span>
-      </a>
-      <a href="team.html" class="btn-link">View team page</a>
-    </div>
 
-    <!-- Shown only when Supabase isn't configured -->
+  <!-- ===== Login screen (centered) ===== -->
+  <div id="login-view" class="admin-login-screen">
+    <div class="admin-login-box">
+      <a href="team.html" class="login-logo">Law Chambers Of DKP</a>
+
+      <div id="login-card" class="admin-card">
+        <h2>Team admin login</h2>
+        <form id="login-form">
+          <div class="admin-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" autocomplete="username" required />
+          </div>
+          <div class="admin-field">
+            <label for="password">Password</label>
+            <input type="password" id="password" autocomplete="current-password" required />
+          </div>
+          <div id="login-error" class="admin-error"></div>
+          <button type="submit" class="btn" style="width:100%;">Log In</button>
+        </form>
+        <div class="admin-forgot"><a href="#" id="forgot-link">Forgot password?</a></div>
+        <div id="forgot-msg" class="admin-small" style="margin-top:.6rem;"></div>
+      </div>
+
+      <div id="reset-card" class="admin-card" style="display:none;">
+        <h2 id="reset-title">Reset your password</h2>
+        <p class="admin-muted admin-small" id="reset-intro" style="margin-bottom:1.1rem; text-transform:none; letter-spacing:0; font-weight:400;">
+          Enter the code we emailed to <strong id="reset-email"></strong>, then choose a new password.
+        </p>
+        <form id="reset-form">
+          <div class="admin-field" id="reset-code-field">
+            <label for="reset-code">Verification code</label>
+            <input type="text" id="reset-code" inputmode="numeric" autocomplete="one-time-code" maxlength="10" pattern="[0-9]{6,10}" placeholder="Code from email" />
+          </div>
+          <div class="admin-field">
+            <label for="new-password">New password</label>
+            <input type="password" id="new-password" autocomplete="new-password" minlength="6" required />
+          </div>
+          <div id="reset-msg" class="admin-error"></div>
+          <button type="submit" class="btn" style="width:100%;">Reset password</button>
+          <div class="admin-forgot"><a href="#" id="reset-back">&larr; Back to login</a></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== App shell ===== -->
+  <div class="admin-wrap" id="admin-app" style="display:none;">
+
     <div id="config-warning" class="admin-warning" style="display:none;">
       <strong>Supabase not configured yet.</strong>
       <p style="margin-top:.5rem;">Open <code>assets/js/supabase-config.js</code> and add your Project URL and anon key, then run
       <code>supabase/team-setup.sql</code> in the Supabase SQL editor and create an admin user under Authentication &gt; Users.</p>
     </div>
 
-    <!-- Login -->
-    <div id="login-view" class="admin-card login-box">
-      <h2>Team admin login</h2>
-      <form id="login-form">
-        <div class="admin-field">
-          <label for="email">Email</label>
-          <input type="email" id="email" autocomplete="username" required />
-        </div>
-        <div class="admin-field">
-          <label for="password">Password</label>
-          <input type="password" id="password" autocomplete="current-password" required />
-        </div>
-        <div id="login-error" class="admin-error"></div>
-        <button type="submit" class="btn" style="width:100%;">Log In</button>
-      </form>
-    </div>
-
     <!-- Dashboard -->
     <div id="dashboard-view" style="display:none;">
       <div class="admin-head">
-        <p class="admin-muted">Signed in as <strong id="user-email"></strong></p>
-        <button id="logout-btn" class="btn btn-outline admin-btn-sm">Log Out</button>
+        <div class="admin-head-left">
+          <a href="team.html" class="logo" style="text-decoration:none;"><span class="logo-mark">Law Chambers Of DKP</span></a>
+          <p class="admin-muted" style="margin:.45rem 0 0;">Signed in as <strong id="user-email"></strong></p>
+        </div>
+        <div class="admin-head-actions">
+          <a href="team.html" class="btn-link">View team page</a>
+          <button id="logout-btn" class="btn btn-outline admin-btn-sm">Log Out</button>
+        </div>
+      </div>
+
+      <div class="admin-section-head">
+        <div style="display:flex; align-items:baseline; gap:.75rem;">
+          <h2>Team members</h2>
+          <span class="admin-muted" id="member-count"></span>
+        </div>
+        <button id="add-member-btn" class="btn">+ Add Member</button>
       </div>
 
       <div class="admin-card">
-        <h2 id="form-title">Add a team member</h2>
-        <form id="member-form">
+        <div id="members-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Add / Edit member modal ===== -->
+  <div id="member-modal" class="modal-overlay">
+    <div class="modal-dialog modal-scroll">
+      <div class="modal-head">
+        <h2 id="form-title">Add team member</h2>
+        <button type="button" class="modal-close" id="member-modal-close" aria-label="Close">&times;</button>
+      </div>
+      <form id="member-form">
+        <div class="modal-body">
           <div class="admin-grid">
             <div class="admin-field"><label for="f-name">Name *</label><input type="text" id="f-name" required /></div>
             <div class="admin-field"><label for="f-designation">Designation</label><input type="text" id="f-designation" placeholder="Associate" /></div>
 
             <div class="admin-field full">
-              <label for="f-photo">Photo</label>
-              <input type="file" id="f-photo" accept="image/*" />
+              <label>Photo</label>
+              <input type="file" id="f-photo" accept="image/*" style="display:none;" />
+              <button type="button" id="f-photo-btn" class="btn btn-outline admin-btn-sm" style="align-self:flex-start;">Choose file</button>
+              <div id="f-photo-chosen" class="file-chosen" style="display:none;">
+                <span id="f-photo-name" class="file-name"></span>
+                <button type="button" id="f-photo-clear" class="file-clear" aria-label="Remove file">&times;</button>
+              </div>
               <div id="photo-preview-wrap" style="display:none; align-items:center; gap:1rem; margin-top:.6rem;">
-                <img id="photo-preview" alt="Current photo"
-                     style="width:64px; height:64px; object-fit:cover; border:1px solid var(--color-line);" />
+                <img id="photo-preview" alt="Current photo" style="width:64px; height:64px; object-fit:cover; border:1px solid var(--color-line);" />
                 <label class="admin-muted admin-small" style="text-transform:none; letter-spacing:0; font-weight:400;">
                   <input type="checkbox" id="f-remove-photo" /> Remove photo
                 </label>
@@ -115,20 +228,34 @@
 
             <div class="admin-field full"><label for="f-bio">Bio</label><textarea id="f-bio" placeholder="Leave a blank line between paragraphs."></textarea></div>
           </div>
-          <div class="admin-actions">
-            <button type="submit" id="save-btn" class="btn">Add Team Member</button>
-            <button type="button" id="cancel-edit" class="btn btn-outline" style="display:none;">Cancel</button>
-            <span id="form-msg" class="admin-success"></span>
-          </div>
-        </form>
-      </div>
+          <div id="form-msg" class="admin-error"></div>
+        </div>
+        <div class="modal-foot">
+          <button type="button" id="cancel-edit" class="btn btn-outline">Cancel</button>
+          <button type="submit" id="save-btn" class="btn">Add Team Member</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-      <div class="admin-card">
-        <h2>Current team</h2>
-        <div id="members-list"></div>
+  <!-- ===== Delete confirmation modal ===== -->
+  <div id="confirm-modal" class="modal-overlay">
+    <div class="modal-dialog confirm">
+      <div class="modal-head">
+        <h2>Delete member</h2>
+        <button type="button" class="modal-close" id="confirm-close" aria-label="Close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p id="confirm-text" style="line-height:1.7;"></p>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn btn-outline" id="confirm-cancel">Cancel</button>
+        <button type="button" class="btn admin-btn-danger" id="confirm-delete">Delete</button>
       </div>
     </div>
   </div>
+
+  <div id="toast" class="toast"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/js/supabase-config.js"></script>

@@ -207,26 +207,51 @@ function initDisclaimer() {
   }
 }
 
-/* ---------- Form Submission ---------- */
+/* ---------- Form Submission (Web3Forms) ---------- */
 function initFormSubmission() {
   const form = document.querySelector('.contact-form');
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const submitBtn = form.querySelector('button[type="submit"]');
     const originalText = submitBtn.textContent;
-    submitBtn.textContent = 'Sending...';
+    submitBtn.textContent = 'Sending…';
     submitBtn.disabled = true;
 
+    const formData = new FormData(form);
+
+    // Email is optional: if provided, use it as reply-to; if blank, drop it
+    // so an empty value doesn't get flagged as an invalid email.
+    const email = (formData.get('email') || '').trim();
+    if (email) {
+      formData.set('replyto', email);
+    } else {
+      formData.delete('email');
+    }
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        submitBtn.textContent = 'Enquiry Sent ✓';
+        form.reset();
+      } else {
+        submitBtn.textContent = 'Couldn’t send — try again';
+      }
+    } catch (err) {
+      submitBtn.textContent = 'Network error — try again';
+    }
+
     setTimeout(() => {
-      submitBtn.textContent = 'Message Sent';
-      form.reset();
-      setTimeout(() => {
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-      }, 2400);
-    }, 1200);
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }, 3000);
   });
 }
 
