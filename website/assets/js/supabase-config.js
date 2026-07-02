@@ -6,6 +6,6 @@
 // Replace the two placeholder values below, then save.
 // ============================================================
 window.SUPABASE_CONFIG = {
-  url: 'YOUR_SUPABASE_URL',
-  anonKey: 'YOUR_SUPABASE_ANON_KEY'
+  url: 'https://qkvxwmaeokkjdvlurwso.supabase.co',
+  anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFrdnh3bWFlb2tramR2bHVyd3NvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI5Njg2NzAsImV4cCI6MjA5ODU0NDY3MH0.8kvvCLbWlLjTH2Zy9Z56iFsOyMIsL9Dl0Z-GwB87134'
 };
