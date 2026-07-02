@@ -86,6 +86,18 @@
     .admin-forgot a { font-family: var(--font-sans); font-size: 0.875rem; color: var(--color-royal-blue); text-decoration: none; }
     .admin-forgot a:hover { text-decoration: underline; }
 
+    /* Show/hide password toggle */
+    .pw-wrap { position: relative; display: flex; }
+    .pw-wrap input { flex: 1; padding-right: 4.25rem !important; }
+    .pw-toggle {
+      position: absolute; right: 1px; top: 1px; bottom: 1px; width: 4rem;
+      display: flex; align-items: center; justify-content: center;
+      background: none; border: none; cursor: pointer;
+      font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-gray);
+    }
+    .pw-toggle:hover { color: var(--color-black); }
+
     @media (max-width: 640px) {
       .admin-wrap { padding: 96px 1.15rem 64px; }
       .admin-grid { grid-template-columns: 1fr; }
@@ -119,7 +131,10 @@
           </div>
           <div class="admin-field">
             <label for="password">Password</label>
-            <input type="password" id="password" autocomplete="current-password" required />
+            <div class="pw-wrap">
+              <input type="password" id="password" autocomplete="current-password" required />
+              <button type="button" class="pw-toggle" data-target="password" aria-label="Show password">Show</button>
+            </div>
           </div>
           <div id="login-error" class="admin-error"></div>
           <button type="submit" class="btn" style="width:100%;">Log In</button>
@@ -140,7 +155,10 @@
           </div>
           <div class="admin-field">
             <label for="new-password">New password</label>
-            <input type="password" id="new-password" autocomplete="new-password" minlength="6" required />
+            <div class="pw-wrap">
+              <input type="password" id="new-password" autocomplete="new-password" minlength="6" required />
+              <button type="button" class="pw-toggle" data-target="new-password" aria-label="Show password">Show</button>
+            </div>
           </div>
           <div id="reset-msg" class="admin-error"></div>
           <button type="submit" class="btn" style="width:100%;">Reset password</button>

@@ -123,6 +123,19 @@
     await sb.auth.signOut();
   });
 
+  // ---------- Show / hide password toggles ----------
+  document.querySelectorAll('.pw-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const input = $(btn.dataset.target);
+      if (!input) return;
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.textContent = show ? 'Hide' : 'Show';
+      btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+      input.focus();
+    });
+  });
+
   // ---------- Forgot password (send reset email) ----------
   $('forgot-link').addEventListener('click', async (e) => {
     e.preventDefault();
