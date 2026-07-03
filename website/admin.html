@@ -100,6 +100,9 @@
 
     @media (max-width: 640px) {
       .admin-wrap { padding: 96px 1.15rem 64px; }
+      /* Stack the header + left-align the actions so everything lines up */
+      .admin-head { flex-direction: column; align-items: flex-start; }
+      .admin-head-actions { margin-left: 0; }
       .admin-grid { grid-template-columns: 1fr; }
       .member-actions { width: 100%; }
       .member-actions .btn { flex: 1; }
